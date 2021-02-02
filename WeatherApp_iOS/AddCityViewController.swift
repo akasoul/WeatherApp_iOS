@@ -25,7 +25,6 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.cities.getCount() ?? 0
         return count
@@ -42,6 +41,9 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         return cell
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.cities.setFilter(str: self.searchBar.text!)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,8 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.table.delegate=self
         self.table.dataSource=self
         self.table.register(UITableViewCell.self, forCellReuseIdentifier: self.cellID)
+        
+        self.searchBar.delegate=self
         
     }
     
