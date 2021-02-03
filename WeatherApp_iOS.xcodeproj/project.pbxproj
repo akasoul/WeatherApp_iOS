@@ -18,6 +18,8 @@
 		CE128ACD25C9449C00D9794F /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE128ACC25C9449C00D9794F /* Cities.swift */; };
 		CE128AD025C96D6500D9794F /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE128ACF25C96D6500D9794F /* AddCityViewController.swift */; };
 		CE1E235125CA96B00091022A /* hc.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE1E235025CA96AF0091022A /* hc.txt */; };
+		CE1E235725CAA4C10091022A /* AddCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E235525CAA4C10091022A /* AddCityCell.swift */; };
+		CE1E235825CAA4C10091022A /* AddCityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1E235625CAA4C10091022A /* AddCityCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +35,9 @@
 		CE128AC925C935C500D9794F /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		CE128ACC25C9449C00D9794F /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
 		CE128ACF25C96D6500D9794F /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
-		CE1E235025CA96AF0091022A /* hc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hc.txt; sourceTree = "<group>"; };
+		CE1E235025CA96AF0091022A /* hc.txt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text; path = hc.txt; sourceTree = "<group>"; };
+		CE1E235525CAA4C10091022A /* AddCityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityCell.swift; sourceTree = "<group>"; };
+		CE1E235625CAA4C10091022A /* AddCityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCityCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				CE128AB725C9358100D9794F /* Main.storyboard */,
 				CE128ACF25C96D6500D9794F /* AddCityViewController.swift */,
 				CE128ABD25C9358D00D9794F /* Assets.xcassets */,
+				CE1E235425CAA46E0091022A /* Cells */,
 				CE128ABF25C9358D00D9794F /* LaunchScreen.storyboard */,
 				CE128AC225C9358D00D9794F /* Info.plist */,
 				CE1E235025CA96AF0091022A /* hc.txt */,
@@ -80,6 +85,15 @@
 				CE128ABA25C9358100D9794F /* WeatherApp_iOS.xcdatamodeld */,
 			);
 			path = WeatherApp_iOS;
+			sourceTree = "<group>";
+		};
+		CE1E235425CAA46E0091022A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE1E235525CAA4C10091022A /* AddCityCell.swift */,
+				CE1E235625CAA4C10091022A /* AddCityCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1E235825CAA4C10091022A /* AddCityCell.xib in Resources */,
 				CE1E235125CA96B00091022A /* hc.txt in Resources */,
 				CE128AC125C9358D00D9794F /* LaunchScreen.storyboard in Resources */,
 				CE128ACA25C935C600D9794F /* city.list.json in Resources */,
@@ -154,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1E235725CAA4C10091022A /* AddCityCell.swift in Sources */,
 				CE128AB625C9358100D9794F /* ViewController.swift in Sources */,
 				CE128AD025C96D6500D9794F /* AddCityViewController.swift in Sources */,
 				CE128ACD25C9449C00D9794F /* Cities.swift in Sources */,

@@ -36,13 +36,25 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
-        let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID)!
-        cell.textLabel!.text=self.cities.getAt(index: indexPath.row)!.name!
+        let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID) as! AddCityCell
+        let cellData=self.cities.getAt(index: indexPath.row)
+        cell.data = .init(name: cellData?.name ?? "", state: cellData?.state ?? "", country: cellData?.country ?? "")
         return cell
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.cities.setFilter(str: self.searchBar.text!)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        //self.cities.setFilter(str: self.searchBar.text!)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.cities.setFilter(str: searchText)
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        //self.cities.setFilter(str: self.searchBar.text!)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +63,8 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         self.table.delegate=self
         self.table.dataSource=self
-        self.table.register(UITableViewCell.self, forCellReuseIdentifier: self.cellID)
+        let addCityCellNib=UINib(nibName: "AddCityCell", bundle: .main)
+        self.table.register(addCityCellNib, forCellReuseIdentifier: self.cellID)
         
         self.searchBar.delegate=self
         
