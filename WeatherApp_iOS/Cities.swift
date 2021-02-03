@@ -69,7 +69,7 @@ class Cities{
             catch{
                 print(error)
             }
-            
+            print(path2)
             FileManager.default.createFile(atPath: path2, contents: nil, attributes: [:])
             let fh=FileHandle(forUpdatingAtPath: path2)
             fh?.write("[".data(using: .utf8)!)
@@ -77,7 +77,7 @@ class Cities{
             
             for i in 0..<(self.data?.count ?? 0){
                 var str=""
-                str += "cityStruct(id: \(self.data![i].id!), name: \(self.data![i].name!), country: \(self.data![i].country!), coord: cityStruct.coordinates(lon: \(self.data![i].coord!.lon!), lat: \(self.data![i].coord!.lat!)),"
+                str += "cityStruct(id: \(self.data![i].id!), name: \""+self.data![i].name!+"\", country: \""+self.data![i].country!+"\", coord: cityStruct.coordinates(lon: \(self.data![i].coord!.lon!), lat: \(self.data![i].coord!.lat!))),"
                 
                 fh?.write(str.data(using: .utf8)!)
             }
@@ -120,4 +120,4 @@ class Cities{
 }
 
 
-let cs: [cityStruct]=
+let tmp1=[cityStruct(id: 225284, name: "'Ali Sabieh", country: "DJ", coord: cityStruct.coordinates(lon: 42.712502, lat: 11.15583))]
