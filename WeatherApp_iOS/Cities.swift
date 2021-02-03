@@ -43,7 +43,7 @@ class Cities{
         let path = Bundle.main.bundlePath+"/city.list.json"
         let url = URL(fileURLWithPath: path)//URL(string: path)
         let folderPath=Bundle.main.bundlePath+"/citiesFolder"
-        let path2=Bundle.main.bundlePath+"/citiesFolder/hc.txt"
+        let path2=Bundle.main.bundlePath+"/citiesFolder/hc.swift"
         if(!FileManager.default.fileExists(atPath: folderPath)){
             do {
                 try FileManager.default.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: [:])
@@ -52,8 +52,8 @@ class Cities{
                 
             }
         }
-        DispatchQueue.global(qos: .background).async{
-            
+        DispatchQueue.global(qos: .userInteractive).async{
+            let t1=Date()
             var str: String?
             do{
                 str=try String(contentsOf: url)
@@ -75,23 +75,25 @@ class Cities{
             catch{
                 print(error)
             }
-            print(path2)
-            FileManager.default.createFile(atPath: path2, contents: nil, attributes: [:])
-            let fh=FileHandle(forUpdatingAtPath: path2)
-            fh?.write("[".data(using: .utf8)!)
-
-            
-            for i in 0..<(self.data?.count ?? 0){
-                if(self.data![i].name=="-"){
-                    continue
-                }
-                var str=""
-                str += "cityStruct(id: \(self.data![i].id!), name: \""+self.data![i].name!+"\", country: \""+self.data![i].country!+"\", state: \""+self.data![i].state!+"\", coord: cityStruct.coordinates(lon: \(self.data![i].coord!.lon!), lat: \(self.data![i].coord!.lat!))),"
-                
-                fh?.write(str.data(using: .utf8)!)
-            }
-            
-            fh?.write("]".data(using: .utf8)!)
+            let t2=Date().timeIntervalSince(t1)
+            print(t2)
+//            print(path2)
+//            FileManager.default.createFile(atPath: path2, contents: nil, attributes: [:])
+//            let fh=FileHandle(forUpdatingAtPath: path2)
+//            fh?.write("[".data(using: .utf8)!)
+//
+//
+//            for i in 0..<(self.data?.count ?? 0){
+//                if(self.data![i].name=="-"){
+//                    continue
+//                }
+//                var str=""
+//                str += "cityStruct(id: \(self.data![i].id!), name: \""+self.data![i].name!+"\", country: \""+self.data![i].country!+"\", state: \""+self.data![i].state!+"\", coord: cityStruct.coordinates(lon: \(self.data![i].coord!.lon!), lat: \(self.data![i].coord!.lat!))),"
+//
+//                fh?.write(str.data(using: .utf8)!)
+//            }
+//
+//            fh?.write("]".data(using: .utf8)!)
 
             
         }

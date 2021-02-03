@@ -35,7 +35,6 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.row)
         let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID) as! AddCityCell
         let cellData=self.cities.getAt(index: indexPath.row)
         cell.data = .init(name: cellData?.name ?? "", state: cellData?.state ?? "", country: cellData?.country ?? "")
