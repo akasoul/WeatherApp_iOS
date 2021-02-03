@@ -35,9 +35,20 @@ class Cities{
     var filter: String = ""
     
     init(){
+        let path = Bundle.main.bundlePath+"/city.list.json"
+        let url = URL(fileURLWithPath: path)//URL(string: path)
+        let folderPath=Bundle.main.bundlePath+"/citiesFolder"
+        let path2=Bundle.main.bundlePath+"/citiesFolder/hc.txt"
+        if(!FileManager.default.fileExists(atPath: folderPath)){
+            do {
+                try FileManager.default.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: [:])
+            }
+            catch{
+                
+            }
+        }
         DispatchQueue.global(qos: .background).async{
-            let path = Bundle.main.bundlePath+"/city.list.json"
-            let url = URL(fileURLWithPath: path)//URL(string: path)
+            
             var str: String?
             do{
                 str=try String(contentsOf: url)
@@ -58,6 +69,22 @@ class Cities{
             catch{
                 print(error)
             }
+            
+            FileManager.default.createFile(atPath: path2, contents: nil, attributes: [:])
+            let fh=FileHandle(forUpdatingAtPath: path2)
+            fh?.write("[".data(using: .utf8)!)
+
+            
+            for i in 0..<(self.data?.count ?? 0){
+                var str=""
+                str += "cityStruct(id: \(self.data![i].id!), name: \(self.data![i].name!), country: \(self.data![i].country!), coord: cityStruct.coordinates(lon: \(self.data![i].coord!.lon!), lat: \(self.data![i].coord!.lat!)),"
+                
+                fh?.write(str.data(using: .utf8)!)
+            }
+            
+            fh?.write("]".data(using: .utf8)!)
+
+            
         }
     }
     
@@ -91,3 +118,6 @@ class Cities{
         return nil
     }
 }
+
+
+let cs: [cityStruct]=

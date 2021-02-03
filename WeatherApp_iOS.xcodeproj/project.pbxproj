@@ -17,6 +17,7 @@
 		CE128ACA25C935C600D9794F /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = CE128AC925C935C500D9794F /* city.list.json */; };
 		CE128ACD25C9449C00D9794F /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE128ACC25C9449C00D9794F /* Cities.swift */; };
 		CE128AD025C96D6500D9794F /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE128ACF25C96D6500D9794F /* AddCityViewController.swift */; };
+		CE1E234D25CA87550091022A /* hc.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE1E234C25CA87550091022A /* hc.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CE128AC925C935C500D9794F /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		CE128ACC25C9449C00D9794F /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
 		CE128ACF25C96D6500D9794F /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		CE1E234C25CA87550091022A /* hc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hc.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				CE128ABF25C9358D00D9794F /* LaunchScreen.storyboard */,
 				CE128AC225C9358D00D9794F /* Info.plist */,
 				CE128AC925C935C500D9794F /* city.list.json */,
+				CE1E234C25CA87550091022A /* hc.txt */,
 				CE128ABA25C9358100D9794F /* WeatherApp_iOS.xcdatamodeld */,
 			);
 			path = WeatherApp_iOS;
@@ -136,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1E234D25CA87550091022A /* hc.txt in Resources */,
 				CE128AC125C9358D00D9794F /* LaunchScreen.storyboard in Resources */,
 				CE128ACA25C935C600D9794F /* city.list.json in Resources */,
 				CE128ABE25C9358D00D9794F /* Assets.xcassets in Resources */,
