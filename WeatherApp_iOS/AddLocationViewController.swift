@@ -11,15 +11,14 @@ import UIKit
 protocol CitiesDelegate: class{
     func structIsReady()
 }
-class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CitiesDelegate{
+class AddLocationViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CitiesDelegate{
     let cellID="cityCell"
-    let cities = Cities()
+    let cities = AddLocationModel()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var table: UITableView!
     
     
     func structIsReady() {
-        print("struct is ready")
         DispatchQueue.main.async{
         self.table.reloadData()
         }
@@ -34,6 +33,11 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let navVC = (self.parent as! MainNavigationViewController?)
+        else { return }
+        (navVC.viewControllers[0] as! ObservedLocationsViewController).addNewLocation(newLocation: self.cities.getAt(index: indexPath.row)!)
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID) as! AddCityCell
         let cellData=self.cities.getAt(index: indexPath.row)
@@ -41,32 +45,18 @@ class AddCityViewController: UIViewController, UITableViewDelegate,UITableViewDa
         return cell
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.cities.setFilter(str: self.searchBar.text!)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        //self.cities.setFilter(str: self.searchBar.text!)
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.cities.setFilter(str: searchText)
     }
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        //self.cities.setFilter(str: self.searchBar.text!)
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.cities.cdelegate=self
-        
         self.table.delegate=self
         self.table.dataSource=self
         let addCityCellNib=UINib(nibName: "AddCityCell", bundle: .main)
         self.table.register(addCityCellNib, forCellReuseIdentifier: self.cellID)
-        
         self.searchBar.delegate=self
-        
     }
     
 }
