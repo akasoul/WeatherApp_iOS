@@ -8,6 +8,7 @@
 import UIKit
 
 class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DailyForecastDelegate {
+    @IBOutlet weak var table: UITableView!
     private let cellID="dfCell"
     private var selectedLocation: location?{
         didSet{
@@ -17,7 +18,6 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
     func setLocation(loc: location){
         self.selectedLocation=loc
     }
-    @IBOutlet weak var table: UITableView?
     
     private let model = DailyForecastModel()
     override func viewDidLoad() {
@@ -25,8 +25,10 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
         
         self.model.cdelegate=self
         
-        let cell = UINib(nibName: "ObservedLocationCell", bundle: .main)
+        let cell = UINib(nibName: "DailyForecastCell", bundle: .main)
         self.table?.register(cell, forCellReuseIdentifier: self.cellID)
+        self.table?.dataSource=self
+        self.table?.delegate=self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,24 +39,29 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
 
      func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        return self.model.getCount()
         return 0
     }
 
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        // Configure the cell...
+        let cell = table?.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath) as! DailyForecastCell
+        let data = self.model.getAt(index: indexPath.row)
+        if(data != nil){
+            cell.data=data
+            return cell
+        }
 
         return UITableViewCell()
     }
     
     func modelUpdate() {
-         
+        self.table?.reloadData()
     }
     /*
     // Override to support conditional editing of the table view.

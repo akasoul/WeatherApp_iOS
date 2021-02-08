@@ -110,10 +110,25 @@
                     <view key="view" contentMode="scaleToFill" id="3OE-Ug-42n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vBw-GQ-QGr">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="aCn-0y-G5E"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vBw-GQ-QGr" firstAttribute="top" secondItem="aCn-0y-G5E" secondAttribute="top" id="4hZ-pO-Mr0"/>
+                            <constraint firstItem="vBw-GQ-QGr" firstAttribute="leading" secondItem="aCn-0y-G5E" secondAttribute="leading" id="If0-Ta-CoZ"/>
+                            <constraint firstItem="aCn-0y-G5E" firstAttribute="trailing" secondItem="vBw-GQ-QGr" secondAttribute="trailing" id="Vgx-qB-BlA"/>
+                            <constraint firstItem="aCn-0y-G5E" firstAttribute="bottom" secondItem="vBw-GQ-QGr" secondAttribute="bottom" id="Wp4-1g-M8C"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Forecast" image="list.bullet.rectangle" catalog="system" id="iOs-Qw-jL4"/>
+                    <connections>
+                        <outlet property="table" destination="vBw-GQ-QGr" id="FKi-OX-Z9U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvc-1r-qc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

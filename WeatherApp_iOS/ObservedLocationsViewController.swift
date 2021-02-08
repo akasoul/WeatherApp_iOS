@@ -46,7 +46,9 @@ class ObservedLocationsViewController: UITableViewController,UINavigationBarDele
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "myseg"){
         ((segue.destination as! UITabBarController).viewControllers![0] as! DailyForecastViewController).setLocation(loc: self.selectedLocation!)
+    }
     }
     
     func addNewLocation(newLocation: location){
