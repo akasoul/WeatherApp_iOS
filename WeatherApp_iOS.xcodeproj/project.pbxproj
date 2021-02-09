@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3102FE1D25D2FCA50078F99D /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3102FE1C25D2FCA50078F99D /* ChartsViewController.swift */; };
+		3102FE2025D2FF150078F99D /* ChartsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3102FE1F25D2FF150078F99D /* ChartsModel.swift */; };
 		3117868B25D00BF50018756C /* DailyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117868A25D00BF50018756C /* DailyForecastViewController.swift */; };
 		3117869125D00CBE0018756C /* DailyForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117869025D00CBE0018756C /* DailyForecastModel.swift */; };
 		3117869425D030F00018756C /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117869325D030F00018756C /* Structs.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3102FE1C25D2FCA50078F99D /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		3102FE1F25D2FF150078F99D /* ChartsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsModel.swift; sourceTree = "<group>"; };
 		3117868A25D00BF50018756C /* DailyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewController.swift; sourceTree = "<group>"; };
 		3117869025D00CBE0018756C /* DailyForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastModel.swift; sourceTree = "<group>"; };
 		3117869325D030F00018756C /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				313183D325CC877E00DADEB4 /* ObservedLocationsModel.swift */,
 				3117868A25D00BF50018756C /* DailyForecastViewController.swift */,
 				3117869025D00CBE0018756C /* DailyForecastModel.swift */,
+				3102FE1C25D2FCA50078F99D /* ChartsViewController.swift */,
+				3102FE1F25D2FF150078F99D /* ChartsModel.swift */,
 				CE128ABD25C9358D00D9794F /* Assets.xcassets */,
 				31D7D28525D002C400FF6069 /* Charts */,
 				CE1E235425CAA46E0091022A /* Cells */,
@@ -216,8 +222,10 @@
 				31D7D28D25D0038000FF6069 /* ChartLine.swift in Sources */,
 				3117869825D031590018756C /* DailyForecastCell.swift in Sources */,
 				313183CE25CC05AF00DADEB4 /* ObservedLocationsViewController.swift in Sources */,
+				3102FE2025D2FF150078F99D /* ChartsModel.swift in Sources */,
 				CE128ACD25C9449C00D9794F /* AddLocationModel.swift in Sources */,
 				CE128AB225C9358100D9794F /* AppDelegate.swift in Sources */,
+				3102FE1D25D2FCA50078F99D /* ChartsViewController.swift in Sources */,
 				CE128ABC25C9358100D9794F /* WeatherApp_iOS.xcdatamodeld in Sources */,
 				3117869125D00CBE0018756C /* DailyForecastModel.swift in Sources */,
 				313183D425CC877E00DADEB4 /* ObservedLocationsModel.swift in Sources */,
