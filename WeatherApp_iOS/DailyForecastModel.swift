@@ -21,6 +21,35 @@ class DailyForecastModel{
     }
     private var selectedLocation: location?{
         didSet{
+            let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            let locFilePath=path+String(self.selectedLocation!.coord.lat)+"."+String(self.selectedLocation!.coord.lon)+".req"
+            if(FileManager.default.fileExists(atPath: path)){
+                if(FileManager.default.fileExists(atPath: locFilePath)){
+                    let str=try? String(contentsOfFile: locFilePath)
+                    if(str != nil){
+                        let jsonData=try? JSONDecoder().decode(DailyForecastForStorage.self,from: str!.data(using: .utf8)! )
+                        if(jsonData != nil){
+                            if(jsonData!.data != nil){
+                                if(jsonData!.dt != nil){
+                                    if(jsonData!.dt! > Date().addingTimeInterval(-3600)){
+                                        if(jsonData!.data!.daily != nil){
+                                            var tmp: [Daily]=[]
+                                            for i in 0..<jsonData!.data!.daily!.count{
+                                                tmp.append(jsonData!.data!.daily![i])
+                                            }
+                                            self.dailyWeather=tmp
+                                            return
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: [:])
+            }
             let url=URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=\(self.selectedLocation!.coord.lat)&lon=\(self.selectedLocation!.coord.lon)&exclude=hourly,current,minutely,alerts&appid=0601def1087b7d7381320d12039fea10")
             if(url == nil){
                 return
@@ -40,12 +69,24 @@ class DailyForecastModel{
                 if(jsonData!.daily==nil){
                     return
                 }
-
+                
                 var tmp: [Daily]=[]
                 for i in 0..<jsonData!.daily!.count{
                     tmp.append(jsonData!.daily![i])
                 }
                 self.dailyWeather=tmp
+                let date=Date()
+                let jsonDataForStorage=DailyForecastForStorage(data: jsonData, dt: date)
+                let encoded = try? JSONEncoder().encode(jsonDataForStorage)
+                if(encoded != nil){
+                    let url = URL(fileURLWithPath: locFilePath)
+                    do{
+                        try encoded!.write(to: url)
+                    }
+                    catch{
+                        print(error)
+                    }
+                }
                 
             }
             task.resume()

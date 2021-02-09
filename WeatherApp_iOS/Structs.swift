@@ -104,4 +104,7 @@ struct Temp: Codable,Equatable  {
     var eve, morn: Double?
 }
 
-
+struct DailyForecastForStorage: Codable,Equatable{
+    var data:DailyForecastJson?
+    var dt: Date?
+}

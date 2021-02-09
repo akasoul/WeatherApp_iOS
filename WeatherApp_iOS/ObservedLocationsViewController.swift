@@ -24,7 +24,7 @@ class ObservedLocationsViewController: UITableViewController,UINavigationBarDele
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.locationsTable.dequeueReusableCell(withIdentifier: self.cellID) as! ObservedLocationCell
         let cellData=self.weatherInLocations.getAt(index: indexPath.row)
-        let windSpeed = String(cellData.wind!.speed!)
+        let windSpeed = String(cellData.wind?.speed ?? 0)
         //let windDeg = String(cellData.wind!.deg!)
         let windStr = windSpeed+" m/s"
         cell.data = .init(name: cellData.name!, temperature: cellData.main!.temp!, wind: windStr, weather: UIImage(named: cellData.weather![0].icon!)!)
