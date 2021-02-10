@@ -7,37 +7,53 @@
 
 import UIKit
 
-class ChartsViewController: UIViewController {
+class ChartsViewController: UIViewController, ChartsModelDelegate {
+    func modelUpdate() {
+        self.temperatureChartInit()
+    }
+    
     @IBOutlet weak var temperatureChartView: UIView!
     @IBOutlet weak var pressureChartView: UIView!
     @IBOutlet weak var humidityChartView: UIView!
     @IBOutlet weak var uviChartView: UIView!
-
+    private var selectedLocation: location?{
+        didSet{
+            self.model.setLocation(loc: self.selectedLocation!)
+        }
+    }
     let model = ChartsModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let temperatureChart=UIBezierPath()
-        temperatureChart.move(to: CGPoint(x: 0, y: 0))
-        temperatureChart.addLine(to: CGPoint(x: 10, y: 30))
-        temperatureChart.addLine(to: CGPoint(x: 20, y: 100))
-        temperatureChart.addLine(to: CGPoint(x: 30, y: 50))
-        let caLayer=CAShapeLayer()
-        caLayer.fillColor = .none
-        caLayer.strokeColor = UIColor.blue.cgColor
-        caLayer.path=temperatureChart.cgPath
-        self.temperatureChartView.layer.addSublayer(caLayer)
+        self.temperatureChartInit()
+        self.model.cdelegate=self
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setLocation(loc: location){
+        self.selectedLocation=loc
     }
-    */
-
+    
+    func temperatureChartInit(){
+        let temperatureData=self.model.getTemperatureData()
+        if temperatureData.count>0{
+            let max=temperatureData.max()!
+            let path=UIBezierPath()
+            let viewWidth=self.temperatureChartView.frame.width
+            let viewHeight=self.temperatureChartView.frame.height
+            let step: CGFloat=viewWidth/CGFloat(temperatureData.count)
+            path.move(to: CGPoint(x: 0, y: viewHeight))
+            for i in 0..<temperatureData.count{
+                let point = CGPoint(x: CGFloat(i)*step, y: viewHeight*CGFloat(temperatureData[i])/CGFloat(max) )
+                print(point)
+                path.addLine(to: point)
+            }
+            let caLayer=CAShapeLayer()
+            caLayer.fillColor = .none
+            caLayer.strokeColor = UIColor.blue.cgColor
+            caLayer.path=path.cgPath
+            self.temperatureChartView.layer.addSublayer(caLayer)
+        }
+    }
+    
 }

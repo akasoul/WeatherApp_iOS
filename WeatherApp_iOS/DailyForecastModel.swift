@@ -7,12 +7,14 @@
 
 import Foundation
 
+
 protocol DailyForecastDelegate: class{
     func modelUpdate()
 }
 
 
 class DailyForecastModel{
+    let updateTime: Double=3600 //seconds
     var cdelegate: DailyForecastDelegate?
     private var dailyWeather: [Daily]?{
         didSet{
@@ -21,7 +23,7 @@ class DailyForecastModel{
     }
     private var selectedLocation: location?{
         didSet{
-            let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
             let locFilePath=path+String(self.selectedLocation!.coord.lat)+"."+String(self.selectedLocation!.coord.lon)+".req"
             if(FileManager.default.fileExists(atPath: path)){
                 if(FileManager.default.fileExists(atPath: locFilePath)){
@@ -31,7 +33,7 @@ class DailyForecastModel{
                         if(jsonData != nil){
                             if(jsonData!.data != nil){
                                 if(jsonData!.dt != nil){
-                                    if(jsonData!.dt! > Date().addingTimeInterval(-3600)){
+                                    if(jsonData!.dt! > Date().addingTimeInterval(-self.updateTime)){
                                         if(jsonData!.data!.daily != nil){
                                             var tmp: [Daily]=[]
                                             for i in 0..<jsonData!.data!.daily!.count{

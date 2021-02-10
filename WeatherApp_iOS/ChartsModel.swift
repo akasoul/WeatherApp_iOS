@@ -12,6 +12,7 @@ protocol ChartsModelDelegate: class {
 }
 
 class ChartsModel{
+    let updateTime: Double=3600 //seconds
     var cdelegate: ChartsModelDelegate?
     private var dailyWeather: [Daily]?{
         didSet{
@@ -30,7 +31,7 @@ class ChartsModel{
                         if(jsonData != nil){
                             if(jsonData!.data != nil){
                                 if(jsonData!.dt != nil){
-                                    if(jsonData!.dt! > Date().addingTimeInterval(-3600)){
+                                    if(jsonData!.dt! > Date().addingTimeInterval(-self.updateTime)){
                                         if(jsonData!.data!.daily != nil){
                                             var tmp: [Daily]=[]
                                             for i in 0..<jsonData!.data!.daily!.count{
@@ -100,14 +101,11 @@ class ChartsModel{
         self.selectedLocation=loc
     }
     
-    func getCount()->Int{
-        return self.dailyWeather?.count ?? 0
-    }
-    
-    func getAt(index: Int)->Daily?{
-        if(index<self.getCount()){
-            return self.dailyWeather?[index]
+    func getTemperatureData()->[Double]{
+        var tmp=[Double]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].temp?.day ?? 0)
         }
-        return nil
+        return tmp
     }
 }
