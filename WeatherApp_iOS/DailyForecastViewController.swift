@@ -42,10 +42,14 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
         return self.model.getCount()
     }
 
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 80
+//    }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = table?.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath) as! DailyForecastCell
+
         let data = self.model.getAt(index: indexPath.row)
         if(data != nil){
             cell.data=data
