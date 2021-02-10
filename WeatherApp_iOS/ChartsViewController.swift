@@ -38,6 +38,7 @@ class ChartsViewController: UIViewController, ChartsModelDelegate {
         let temperatureData=self.model.getTemperatureData()
         if temperatureData.count>0{
             let max=temperatureData.max()!
+            print(max)
             let path=UIBezierPath()
             let viewWidth=self.temperatureChartView.frame.width
             let viewHeight=self.temperatureChartView.frame.height
