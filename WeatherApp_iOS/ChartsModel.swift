@@ -106,6 +106,30 @@ class ChartsModel{
         for i in 0..<(self.dailyWeather?.count ?? 0){
             tmp.append(self.dailyWeather?[i].temp?.day ?? 0)
         }
-        return tmp
+        return tmp.map({ $0 - 273 })
+    }
+    
+    func getTemperatureMaxData()->[Double]{
+        var tmp=[Double]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].temp?.max ?? 0)
+        }
+        return tmp.map({ $0 - 273 })
+    }
+    
+    func getTemperatureMinData()->[Double]{
+        var tmp=[Double]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].temp?.min ?? 0)
+        }
+        return tmp.map({ $0 - 273 })
+    }
+    
+    func getDateNow()->Date{
+        return Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?.first?.dt ?? 0))
+    }
+    
+    func getDateFuture()->Date{
+        return Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?.last?.dt ?? 0))
     }
 }
