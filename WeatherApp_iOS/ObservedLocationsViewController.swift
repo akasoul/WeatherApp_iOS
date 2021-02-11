@@ -19,7 +19,6 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     private let model=ObservedLocationsModel()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.model.getCount())
         return self.model.getCount()
     }
     
@@ -52,7 +51,6 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     }
     
     func addNewLocation(newLocation: location){
-        print("new location")
         self.model.addNewLocation(newLocation: newLocation)
     }
     

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CitiesDelegate: class{
-    func structIsReady()
+    func modelUpdate()
 }
 class AddLocationViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CitiesDelegate{
     let cellID="cityCell"
@@ -18,7 +18,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var table: UITableView!
     
     
-    func structIsReady() {
+    func modelUpdate() {
         DispatchQueue.main.async{
         self.table.reloadData()
         }

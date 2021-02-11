@@ -23,8 +23,8 @@ class DailyForecastModel{
     }
     private var selectedLocation: location?{
         didSet{
-            let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
-            //let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            //let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
             let locFilePath=path+String(self.selectedLocation!.coord.lat)+"."+String(self.selectedLocation!.coord.lon)+".req"
             if(FileManager.default.fileExists(atPath: path)){
                 if(FileManager.default.fileExists(atPath: locFilePath)){
