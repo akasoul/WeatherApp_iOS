@@ -21,7 +21,8 @@ class ChartsModel{
     }
     private var selectedLocation: location?{
         didSet{
-            let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            //let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
             let locFilePath=path+String(self.selectedLocation!.coord.lat)+"."+String(self.selectedLocation!.coord.lon)+".req"
             if(FileManager.default.fileExists(atPath: path)){
                 if(FileManager.default.fileExists(atPath: locFilePath)){
@@ -54,8 +55,10 @@ class ChartsModel{
             if(url == nil){
                 return
             }
+            
             var answer: String=""
             var jsonData: DailyForecastJson?
+            
             let task=URLSession.shared.dataTask(with: url!){data, response, error in
                 guard let data = data else { return }
                 answer=(String(data: data, encoding: .utf8)!)
@@ -89,6 +92,7 @@ class ChartsModel{
                 }
                 
             }
+            
             task.resume()
             while(!task.progress.isFinished){
                 sleep(1)
@@ -126,7 +130,7 @@ class ChartsModel{
     }
     
     func getDates()->[Date]{
-            var tmp=[Date]()
+        var tmp=[Date]()
         for i in 0..<(self.dailyWeather?.count ?? 0){
             tmp.append(Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?[i].dt ?? 0)))
         }
@@ -139,5 +143,28 @@ class ChartsModel{
     
     func getDateFuture()->Date{
         return Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?.last?.dt ?? 0))
+    }
+    
+    func getPressureData()->[Int]{
+        var tmp=[Int]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].pressure ?? 0)
+        }
+        return tmp
+    }
+    
+    func getHumidityData()->[Int]{
+        var tmp=[Int]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].humidity ?? 0)
+        }
+        return tmp
+    }
+    func getUviData()->[Double]{
+        var tmp=[Double]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(self.dailyWeather?[i].uvi ?? 0)
+        }
+        return tmp
     }
 }

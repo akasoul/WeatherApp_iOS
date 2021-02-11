@@ -35,10 +35,14 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let navVC = (self.parent as! MainNavigationViewController?)
-        else { return }
+        else {
+            return
+        }
+        self.dismiss(animated: true, completion: {
         (navVC.viewControllers[0] as! ObservedLocationsViewController).addNewLocation(newLocation: self.cities.getAt(index: indexPath.row)!)
-        self.table.reloadData()
+        })
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID) as! AddCityCell
         let cellData=self.cities.getAt(index: indexPath.row)

@@ -60,8 +60,8 @@ struct Wind: Codable,Equatable {
 
 
 //MARK: - Location
-struct location: Codable{
-    struct coordinates: Codable{
+struct location: Codable,Equatable{
+    struct coordinates: Codable,Equatable{
         let lon: Double
         let lat: Double
     }

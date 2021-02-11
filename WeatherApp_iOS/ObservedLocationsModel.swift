@@ -24,12 +24,15 @@ class ObservedLocationsModel{
             if let encoded = try? encoder.encode(self.observedLocations){
                 UserDefaults.standard.setValue(encoded, forKey: "observedLocations")
             }
-            self.cdelegate?.modelUpdate()
+            self.requestWeather()
         }
     }
     
     private var currentWeather: [WeatherJson]=[]{
         didSet{
+            if(self.currentWeather==[]){
+                return
+            }
             var foundNil=false
             for i in 0..<self.currentWeather.count{
                 if(self.currentWeather[i] == WeatherJson.nilValue){
@@ -37,7 +40,7 @@ class ObservedLocationsModel{
                 }
             }
             if !foundNil{
-            self.cdelegate?.modelUpdate()
+                self.cdelegate?.modelUpdate()
             }
         }
     }
@@ -46,49 +49,58 @@ class ObservedLocationsModel{
         let decoder=JSONDecoder()
         let value=UserDefaults.standard.value(forKey: "observedLocations")
         if(value != nil){
-        if let decoded = try? decoder.decode([location].self, from: value! as! Data){
-            self.observedLocations=decoded
+            if let decoded = try? decoder.decode([location].self, from: value! as! Data){
+                self.observedLocations=decoded
+                self.requestWeather()
+            }
         }
-        }
-        //self.currentWeather=[WeatherJson].init(repeating: WeatherJson.nilValue, count: self.observedLocations.count)
-        //DispatchQueue.global().async{
-            for i in 0..<self.observedLocations.count{
-                var answer=""
-                var responseJson: WeatherJson?
-                let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?id=\(self.observedLocations[i].id)&appid=0601def1087b7d7381320d12039fea10")
-                if(url == nil){
+        
+        
+    }
+    
+    func requestWeather(){
+        DispatchQueue.global().async{
+        for i in 0..<self.observedLocations.count{
+            if(i<self.currentWeather.count){
+                if(self.observedLocations[i].name==self.currentWeather[i].name){
                     continue
                 }
-                let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-                    guard let data = data else { return }
-                    answer=(String(data: data, encoding: .utf8)!)
-                    do{
-                        responseJson = try JSONDecoder().decode(WeatherJson.self, from: answer.data(using: .utf8)!)
-                    }
-                    catch{
-                        print(error)
-                    }
-                }
-                
-                task.resume()
-                while !task.progress.isFinished{
-                    sleep(1)
-                }
-                self.currentWeather.append(responseJson ?? WeatherJson.nilValue)
             }
-        //}
+            var answer=""
+            var responseJson: WeatherJson?
+            let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?id=\(self.observedLocations[i].id)&appid=0601def1087b7d7381320d12039fea10")
+            if(url == nil){
+                continue
+            }
+            let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+                guard let data = data else { return }
+                answer=(String(data: data, encoding: .utf8)!)
+                do{
+                    responseJson = try JSONDecoder().decode(WeatherJson.self, from: answer.data(using: .utf8)!)
+                    self.currentWeather.append(responseJson ?? WeatherJson.nilValue)
+                }
+                catch{
+                    print(error)
+                }
+            }
+            
+            task.resume()
+            while !task.progress.isFinished{
+                sleep(1)
+            }
+        }
+        }
     }
     
     func addNewLocation(newLocation: location){
-        self.observedLocations.append(newLocation)
-    }
-    
-    func getLocationsList()->[location]{
-        return self.observedLocations
-    }
-    
-    func getLocationsCount()->Int{
-        return self.observedLocations.count
+        DispatchQueue.global().sync{
+            for i in 0..<self.observedLocations.count{
+                if(self.observedLocations[i] == newLocation){
+                    return
+                }
+            }
+            self.observedLocations.append(newLocation)
+        }
     }
     
     func getAt(index: Int)->WeatherJson{
@@ -96,8 +108,9 @@ class ObservedLocationsModel{
     }
     
     func deleteAt(index: Int){
-        if(index<self.currentWeather.count){
-        self.currentWeather.remove(at: index)
+        if(index<self.observedLocations.count && index<self.currentWeather.count){
+            self.observedLocations.remove(at: index)
+            self.currentWeather.remove(at: index)
         }
     }
     func getCount()->Int{

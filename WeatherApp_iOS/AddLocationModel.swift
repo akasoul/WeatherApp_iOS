@@ -41,7 +41,7 @@ class AddLocationModel{
                 
             }
         }
-        DispatchQueue.global(qos: .userInteractive).async{
+        DispatchQueue.global(qos: .background).async{
             let t1=Date()
             var str: String?
             do{
@@ -83,16 +83,16 @@ class AddLocationModel{
             return
         }
         self.filter=str
-        while(!self.structIsReady){
-            sleep(1)
-        }
+//        while(!self.structIsReady){
+//            sleep(1)
+//        }
         self.workItem?.cancel()
         self.workItem=DispatchWorkItem(block: {
             print("workItemPerform")
             //self.filteredData=[]
             var tmp=[location]()
             DispatchQueue.global(qos: .background).async {
-                for i in 0..<self.data!.count{
+                for i in 0..<(self.data?.count ?? 0){
                     if(self.data![i].name.lowercased().contains(self.filter.lowercased())){
                         tmp.append(self.data![i])
                     }
