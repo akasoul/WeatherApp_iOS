@@ -125,6 +125,14 @@ class ChartsModel{
         return tmp.map({ $0 - 273 })
     }
     
+    func getDates()->[Date]{
+            var tmp=[Date]()
+        for i in 0..<(self.dailyWeather?.count ?? 0){
+            tmp.append(Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?[i].dt ?? 0)))
+        }
+        return tmp
+    }
+    
     func getDateNow()->Date{
         return Date(timeIntervalSince1970: TimeInterval(self.dailyWeather?.first?.dt ?? 0))
     }

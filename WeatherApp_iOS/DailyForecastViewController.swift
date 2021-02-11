@@ -29,8 +29,6 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
         self.table?.register(cell, forCellReuseIdentifier: self.cellID)
         self.table?.dataSource=self
         self.table?.delegate=self
-        let a = self.parent
-        print(a)
     }
 
 

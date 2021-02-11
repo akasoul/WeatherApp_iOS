@@ -33,7 +33,6 @@ class AddLocationModel{
         let path = Bundle.main.bundlePath+"/city.list.json"
         let url = URL(fileURLWithPath: path)//URL(string: path)
         let folderPath=Bundle.main.bundlePath+"/citiesFolder"
-        let path2=Bundle.main.bundlePath+"/citiesFolder/hc.swift"
         if(!FileManager.default.fileExists(atPath: folderPath)){
             do {
                 try FileManager.default.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: [:])
