@@ -11,7 +11,7 @@ import UIKit
 class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource, ObservdedLocationsDelegate{
     
     
-    @IBOutlet var locationsTable: UITableView!
+    @IBOutlet var table: UITableView!
     @IBOutlet weak var barButtonAddNew: UIBarButtonItem!
     
     private let cellID="ObservedLocationCell"
@@ -23,7 +23,7 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.locationsTable.dequeueReusableCell(withIdentifier: self.cellID) as! ObservedLocationCell
+        let cell = self.table.dequeueReusableCell(withIdentifier: self.cellID) as! ObservedLocationCell
         let cellData=self.model.getAt(index: indexPath.row)
         let windSpeed = String(cellData.wind?.speed ?? 0)
         let windStr = windSpeed+" m/s"
@@ -59,14 +59,15 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
         super.viewDidLoad()
         self.model.cdelegate=self
         let cellNib=UINib(nibName: "ObservedLocationCell", bundle: .main)
-        self.locationsTable.register(cellNib, forCellReuseIdentifier: self.cellID)
-        self.locationsTable.delegate=self
-        self.locationsTable.dataSource=self
+        self.table.register(cellNib, forCellReuseIdentifier: self.cellID)
+        self.table.delegate=self
+        self.table.dataSource=self
+        self.table.separatorStyle = .none
     }
     
     func modelUpdate() {
         DispatchQueue.main.async{
-            self.locationsTable.reloadData()
+            self.table.reloadData()
         }
     }
     

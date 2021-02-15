@@ -17,6 +17,7 @@
 		313183CE25CC05AF00DADEB4 /* ObservedLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313183CD25CC05AF00DADEB4 /* ObservedLocationsViewController.swift */; };
 		313183D125CC27BC00DADEB4 /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313183D025CC27BC00DADEB4 /* MainNavigationViewController.swift */; };
 		313183D425CC877E00DADEB4 /* ObservedLocationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313183D325CC877E00DADEB4 /* ObservedLocationsModel.swift */; };
+		31A5CF9C25D65456005782BE /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A5CF9B25D65456005782BE /* Storage.swift */; };
 		31D7D28125CDC44100FF6069 /* ObservedLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D7D27F25CDC44100FF6069 /* ObservedLocationCell.swift */; };
 		31D7D28225CDC44100FF6069 /* ObservedLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31D7D28025CDC44100FF6069 /* ObservedLocationCell.xib */; };
 		31D7D28D25D0038000FF6069 /* ChartLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D7D28C25D0038000FF6069 /* ChartLine.swift */; };
@@ -45,6 +46,7 @@
 		313183CD25CC05AF00DADEB4 /* ObservedLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedLocationsViewController.swift; sourceTree = "<group>"; };
 		313183D025CC27BC00DADEB4 /* MainNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		313183D325CC877E00DADEB4 /* ObservedLocationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedLocationsModel.swift; sourceTree = "<group>"; };
+		31A5CF9B25D65456005782BE /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		31D7D27F25CDC44100FF6069 /* ObservedLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedLocationCell.swift; sourceTree = "<group>"; };
 		31D7D28025CDC44100FF6069 /* ObservedLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObservedLocationCell.xib; sourceTree = "<group>"; };
 		31D7D28C25D0038000FF6069 /* ChartLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLine.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				313183D025CC27BC00DADEB4 /* MainNavigationViewController.swift */,
 				CE128AB325C9358100D9794F /* SceneDelegate.swift */,
 				3117869325D030F00018756C /* Structs.swift */,
+				31A5CF9B25D65456005782BE /* Storage.swift */,
 				CE128AB725C9358100D9794F /* Main.storyboard */,
 				CE128ACF25C96D6500D9794F /* AddLocationViewController.swift */,
 				CE128ACC25C9449C00D9794F /* AddLocationModel.swift */,
@@ -220,6 +223,7 @@
 				313183D125CC27BC00DADEB4 /* MainNavigationViewController.swift in Sources */,
 				CE128AD025C96D6500D9794F /* AddLocationViewController.swift in Sources */,
 				31D7D28D25D0038000FF6069 /* ChartLine.swift in Sources */,
+				31A5CF9C25D65456005782BE /* Storage.swift in Sources */,
 				3117869825D031590018756C /* DailyForecastCell.swift in Sources */,
 				313183CE25CC05AF00DADEB4 /* ObservedLocationsViewController.swift in Sources */,
 				3102FE2025D2FF150078F99D /* ChartsModel.swift in Sources */,

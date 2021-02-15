@@ -10,8 +10,8 @@
 import Foundation
 
 
-//MARK: - WeatherJson
-struct WeatherJson: Codable,Equatable {
+//MARK: - CurrentWeatherJSON
+struct CurrentWeatherJSON: Codable,Equatable {
     var coord: Coord?
     var weather: [Weather]?
     var base: String?
@@ -25,7 +25,7 @@ struct WeatherJson: Codable,Equatable {
     var name: String?
     var cod: Int?
     
-    static let nilValue=WeatherJson(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil)
+    static let nilValue=CurrentWeatherJSON(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil)
 }
 
 struct Clouds: Codable,Equatable {
@@ -75,8 +75,8 @@ struct location: Codable,Equatable{
 
 
 
-// MARK: - DailyForecast
-struct DailyForecastJson: Codable,Equatable  {
+// MARK: - DailyForecastJSON
+struct DailyForecastJSON: Codable,Equatable  {
     var lat, lon: Double?
     var timezone: String?
     var timezoneOffset: Int?
@@ -105,6 +105,6 @@ struct Temp: Codable,Equatable  {
 }
 
 struct DailyForecastForStorage: Codable,Equatable{
-    var data:DailyForecastJson?
+    var data:DailyForecastJSON?
     var dt: Date?
 }

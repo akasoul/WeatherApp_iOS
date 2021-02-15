@@ -24,7 +24,8 @@ class DailyForecastModel{
     private var selectedLocation: location?{
         didSet{
             //let path="/Users/user/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
-            let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            //let path="/Users/antonvoloshuk/Documents/WeatherApp/request/" //Bundle.main.bundlePath+"/requests/"
+            let path=Bundle.main.bundlePath+"/requests/"
             let locFilePath=path+String(self.selectedLocation!.coord.lat)+"."+String(self.selectedLocation!.coord.lon)+".req"
             if(FileManager.default.fileExists(atPath: path)){
                 if(FileManager.default.fileExists(atPath: locFilePath)){
@@ -58,12 +59,12 @@ class DailyForecastModel{
                 return
             }
             var answer: String=""
-            var jsonData: DailyForecastJson?
+            var jsonData: DailyForecastJSON?
             let task=URLSession.shared.dataTask(with: url!){data, response, error in
                 guard let data = data else { return }
                 answer=(String(data: data, encoding: .utf8)!)
                 do{
-                    jsonData = try JSONDecoder().decode(DailyForecastJson.self, from: answer.data(using: .utf8)!)
+                    jsonData = try JSONDecoder().decode(DailyForecastJSON.self, from: answer.data(using: .utf8)!)
                     
                 }
                 catch{

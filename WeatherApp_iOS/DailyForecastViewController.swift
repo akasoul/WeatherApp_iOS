@@ -26,9 +26,10 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
         self.model.cdelegate=self
         
         let cell = UINib(nibName: "DailyForecastCell", bundle: .main)
-        self.table?.register(cell, forCellReuseIdentifier: self.cellID)
-        self.table?.dataSource=self
-        self.table?.delegate=self
+        self.table.register(cell, forCellReuseIdentifier: self.cellID)
+        self.table.dataSource=self
+        self.table.delegate=self
+        self.table.separatorStyle = .none
     }
 
 
@@ -40,9 +41,7 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
         return self.model.getCount()
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 80
-//    }
+
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 

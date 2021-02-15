@@ -28,14 +28,14 @@ class ObservedLocationsModel{
         }
     }
     
-    private var currentWeather: [WeatherJson]=[]{
+    private var currentWeather: [CurrentWeatherJSON]=[]{
         didSet{
             if(self.currentWeather==[]){
                 return
             }
             var foundNil=false
             for i in 0..<self.currentWeather.count{
-                if(self.currentWeather[i] == WeatherJson.nilValue){
+                if(self.currentWeather[i] == CurrentWeatherJSON.nilValue){
                     foundNil=true
                 }
             }
@@ -67,7 +67,7 @@ class ObservedLocationsModel{
                 }
             }
             var answer=""
-            var responseJson: WeatherJson?
+            var responseJson: CurrentWeatherJSON?
             let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?id=\(self.observedLocations[i].id)&appid=0601def1087b7d7381320d12039fea10")
             if(url == nil){
                 continue
@@ -76,8 +76,8 @@ class ObservedLocationsModel{
                 guard let data = data else { return }
                 answer=(String(data: data, encoding: .utf8)!)
                 do{
-                    responseJson = try JSONDecoder().decode(WeatherJson.self, from: answer.data(using: .utf8)!)
-                    self.currentWeather.append(responseJson ?? WeatherJson.nilValue)
+                    responseJson = try JSONDecoder().decode(CurrentWeatherJSON.self, from: answer.data(using: .utf8)!)
+                    self.currentWeather.append(responseJson ?? CurrentWeatherJSON.nilValue)
                 }
                 catch{
                     print(error)
@@ -103,7 +103,7 @@ class ObservedLocationsModel{
         }
     }
     
-    func getAt(index: Int)->WeatherJson{
+    func getAt(index: Int)->CurrentWeatherJSON{
         return self.currentWeather[index]
     }
     
