@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ObservdedLocationsDelegate: class{
+protocol ObservedLocationModelListener: class{
     func modelUpdate()
 }
 
@@ -16,7 +16,7 @@ protocol ObservdedLocationsDelegate: class{
 
 
 class ObservedLocationsModel{
-    var cdelegate: ObservdedLocationsDelegate?
+    weak var listener: ObservedLocationModelListener?
     
     private var observedLocations:[location]=[]{
         didSet{
@@ -40,7 +40,7 @@ class ObservedLocationsModel{
                 }
             }
             if !foundNil{
-                self.cdelegate?.modelUpdate()
+                self.listener?.modelUpdate()
             }
         }
     }

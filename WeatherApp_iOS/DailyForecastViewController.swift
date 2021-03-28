@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DailyForecastDelegate {
+class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DailyForecastModelListener {
     @IBOutlet weak var table: UITableView!
     private let cellID="dfCell"
     private var selectedLocation: location?{
@@ -23,7 +23,7 @@ class DailyForecastViewController: UIViewController,UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.model.cdelegate=self
+        self.model.listener=self
         
         let cell = UINib(nibName: "DailyForecastCell", bundle: .main)
         self.table.register(cell, forCellReuseIdentifier: self.cellID)

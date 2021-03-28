@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol ChartsModelDelegate: class {
+protocol ChartsModelListener: class {
     func modelUpdate()
 }
 
 class ChartsModel{
     let updateTime: Double=3600 //seconds
-    var cdelegate: ChartsModelDelegate?
+    weak var listener: ChartsModelListener?
     private var dailyWeather: [Daily]?{
         didSet{
-            self.cdelegate?.modelUpdate()
+            self.listener?.modelUpdate()
         }
     }
     private var selectedLocation: location?{

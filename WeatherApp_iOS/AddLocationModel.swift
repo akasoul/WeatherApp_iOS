@@ -7,10 +7,12 @@
 
 import Foundation
 
-
+protocol AddLocationModelListener: class{
+    func modelUpdate()
+}
 
 class AddLocationModel{
-    var cdelegate: CitiesDelegate?
+    weak var listener: AddLocationModelListener?
     
     private var workItem: DispatchWorkItem?
     private var structIsReady=false{
@@ -23,12 +25,14 @@ class AddLocationModel{
     private var data: [location]?{
         didSet{
             self.data?.sort(by: { $0.name < $1.name })
-            cdelegate?.modelUpdate()
+            DispatchQueue.main.async{
+                self.listener?.modelUpdate()
+            }
         }
     }
     private var filteredData: [location] = []{
         didSet{
-            cdelegate?.modelUpdate()
+            listener?.modelUpdate()
         }
     }
     private var filterString: String = ""{
@@ -52,11 +56,10 @@ class AddLocationModel{
                 try FileManager.default.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: [:])
             }
             catch{
-                
+                return
             }
         }
         DispatchQueue.global(qos: .userInteractive).async{
-            let t1=Date()
             var str: String?
             do{
                 str=try String(contentsOf: url)
@@ -64,8 +67,6 @@ class AddLocationModel{
             catch{
                 print(error)
             }
-            let t2=Date()
-            print(t2.timeIntervalSince(t1))
             
             var tmp: [location]?
             do{
@@ -78,14 +79,12 @@ class AddLocationModel{
             catch{
                 print(error)
             }
-            let t3=Date()
-            print(t3.timeIntervalSince(t2))
             
             self.structIsReady=true
         }
     }
     
-    func getCount()->Int?{
+    func getCount()->Int{
         return self.filteredData.count
     }
     
@@ -96,10 +95,9 @@ class AddLocationModel{
     func performFilter(){
         DispatchQueue.global().sync{
             if(self.structIsReady){
+                self.newFilter=false
                 if(self.filterString==""){
                     self.filteredData=self.data ?? []
-                    self.newFilter=false
-                    return
                 }
                 else{
                     var tmp=[location]()
@@ -109,7 +107,6 @@ class AddLocationModel{
                         }
                     }
                     self.filteredData=tmp
-                    self.newFilter=false
                 }
             }
         }

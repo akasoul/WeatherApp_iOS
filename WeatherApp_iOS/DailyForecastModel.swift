@@ -8,17 +8,17 @@
 import Foundation
 
 
-protocol DailyForecastDelegate: class{
+protocol DailyForecastModelListener: class{
     func modelUpdate()
 }
 
 
 class DailyForecastModel{
     let updateTime: Double=3600 //seconds
-    var cdelegate: DailyForecastDelegate?
+    weak var listener: DailyForecastModelListener?
     private var dailyWeather: [Daily]?{
         didSet{
-            self.cdelegate?.modelUpdate()
+            self.listener?.modelUpdate()
         }
     }
     private var selectedLocation: location?{

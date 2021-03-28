@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 
-protocol CitiesDelegate: class{
-    func modelUpdate()
-}
-class AddLocationViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CitiesDelegate{
+
+class AddLocationViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,AddLocationModelListener{
     let cellID="cityCell"
     let cities = AddLocationModel()
     @IBOutlet weak var searchBar: UISearchBar!
@@ -25,8 +23,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = self.cities.getCount() ?? 0
-        return count
+        return self.cities.getCount()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,7 +31,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let navVC = (self.parent as! MainNavigationViewController?)
+        guard let navVC = (self.parent as! UINavigationController?)
         else {
             return
         }
@@ -56,7 +53,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.cities.cdelegate=self
+        self.cities.listener=self
         self.table.delegate=self
         self.table.dataSource=self
         let addCityCellNib=UINib(nibName: "AddCityCell", bundle: .main)

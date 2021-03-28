@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChartsViewController: UIViewController, ChartsModelDelegate {
+class ChartsViewController: UIViewController, ChartsModelListener {
     func modelUpdate() {
         self.drawTemperatureChart()
         self.drawPressureChart()
@@ -35,7 +35,7 @@ class ChartsViewController: UIViewController, ChartsModelDelegate {
         self.drawPressureChart()
         self.drawHumidityChart()
         self.drawUviChart()
-        self.model.cdelegate=self
+        self.model.listener=self
         // Do any additional setup after loading the view.
     }
     

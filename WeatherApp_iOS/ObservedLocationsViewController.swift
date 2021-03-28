@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource, ObservdedLocationsDelegate{
+class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource, ObservedLocationModelListener{
     
     
     @IBOutlet var table: UITableView!
@@ -57,7 +57,7 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.model.cdelegate=self
+        self.model.listener=self
         let cellNib=UINib(nibName: "ObservedLocationCell", bundle: .main)
         self.table.register(cellNib, forCellReuseIdentifier: self.cellID)
         self.table.delegate=self
