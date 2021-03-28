@@ -32,7 +32,9 @@ class AddLocationModel{
     }
     private var filteredData: [location] = []{
         didSet{
-            listener?.modelUpdate()
+            DispatchQueue.main.async{
+                self.listener?.modelUpdate()
+            }
         }
     }
     private var filterString: String = ""{
@@ -113,7 +115,10 @@ class AddLocationModel{
     }
     
     func getAt(index: Int)->location?{
-        return self.filteredData[index]
+        if(index<self.filteredData.count){
+            return self.filteredData[index]
+        }
+        return nil
     }
     
 }

@@ -40,20 +40,20 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let loc = self.model.getAt(index: indexPath.row)
         self.selectedLocation = location(id: loc.id ?? 0, name: loc.name ?? "", country: loc.sys!.country ?? "", state: "", coord: location.coordinates(lon: loc.coord!.lon!, lat: loc.coord!.lat!))
-        performSegue(withIdentifier: "myseg", sender: self)
+        performSegue(withIdentifier: "segInfo", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "myseg"){
+        if(segue.identifier == "segInfo"){
             ((segue.destination as! UITabBarController).viewControllers![0] as! DailyForecastViewController).setLocation(loc: self.selectedLocation!)
             ((segue.destination as! UITabBarController).viewControllers![1] as! ChartsViewController).setLocation(loc: self.selectedLocation!)
         }
+        if(segue.identifier == "segAddNew"){
+            (segue.destination as! AddLocationViewController).listener=self
+        }
     }
     
-    func addNewLocation(newLocation: location){
-        self.model.addNewLocation(newLocation: newLocation)
-    }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,5 +72,13 @@ class ObservedLocationsViewController: UIViewController,UINavigationBarDelegate,
     }
     
     
+    
+}
+
+
+extension ObservedLocationsViewController: AddLocationListener{
+    func addNewLocation(newLocation: location){
+        self.model.addNewLocation(newLocation: newLocation)
+    }
     
 }

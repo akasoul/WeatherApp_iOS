@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="height" constant="80" id="Q5S-V0-xFO"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="V7M-yL-1dL" kind="show" identifier="myseg" id="jHb-Di-WUq"/>
+                                    <segue destination="V7M-yL-1dL" kind="show" identifier="segInfo" id="jHb-Di-WUq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -42,7 +42,7 @@
                     <navigationItem key="navigationItem" title="Locations" id="wVQ-gZ-565">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="PZi-qa-9bW">
                             <connections>
-                                <segue destination="3bP-zU-sFj" kind="show" id="230-0c-I3T"/>
+                                <segue destination="3bP-zU-sFj" kind="show" identifier="segAddNew" id="230-0c-I3T"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

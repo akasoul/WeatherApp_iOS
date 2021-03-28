@@ -8,18 +8,20 @@
 import Foundation
 import UIKit
 
+protocol AddLocationListener:class{
+    func addNewLocation(newLocation: location)
+}
 
 class AddLocationViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,AddLocationModelListener{
     let cellID="cityCell"
     let cities = AddLocationModel()
+    weak var listener: AddLocationListener?
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var table: UITableView!
     
     
     func modelUpdate() {
-        DispatchQueue.main.async{
         self.table.reloadData()
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,13 +33,12 @@ class AddLocationViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let navVC = (self.parent as! UINavigationController?)
-        else {
+        guard let newCity=self.cities.getAt(index: indexPath.row)
+        else{
             return
         }
-        self.dismiss(animated: true, completion: {
-        (navVC.viewControllers[0] as! ObservedLocationsViewController).addNewLocation(newLocation: self.cities.getAt(index: indexPath.row)!)
-        })
+        self.listener?.addNewLocation(newLocation: newCity)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
